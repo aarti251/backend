@@ -20,7 +20,13 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 //cors
-app.use(cors());
+app.use(cors(
+  {
+    origin:["https://frontend-nu-flax-37.vercel.app"],
+    methods:["POST","GET"],
+    credentials:true
+  }
+));
 // To parse JSON bodies
 app.use(express.json());
 
