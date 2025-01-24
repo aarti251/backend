@@ -19,14 +19,14 @@ if (!fs.existsSync(uploadsDir)) {
   console.log('Uploads directory created!');
 }
 
-//cors
-app.use(cors(
-  {
-    origin:["https://frontend-nu-flax-37.vercel.app"],
-    methods:["POST","GET"],
-    credentials:true
-  }
-));
+const corsOptions = {
+  origin: 'https://frontend-nu-flax-37.vercel.app/', // Frontend URL
+  methods: 'GET,POST,PUT,DELETE',            // Allowed HTTP methods
+  allowedHeaders: 'Content-Type,Authorization', // Allowed headers
+};
+
+app.use(cors(corsOptions));  // Enable CORS for all routes
+
 // To parse JSON bodies
 app.use(express.json());
 
@@ -44,7 +44,7 @@ app.use('/api', taskRoutes);
 connectDb().then(()=>{
     
 
-const PORT=5000;
+const PORT=process.env.PORT;
 app.listen(PORT,()=>{
 console.log(`http://localhost:${PORT}`)
 });
